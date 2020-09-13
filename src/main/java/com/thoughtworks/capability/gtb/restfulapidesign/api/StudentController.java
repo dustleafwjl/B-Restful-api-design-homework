@@ -39,11 +39,11 @@ public class StudentController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<Student> getAllStudentsByGender(@RequestBody(required = false) String gender) {
-        if(gender == null) {
+    public List<Student> getAllStudentsByGender(@RequestBody(required = false) Student student) {
+        if(student == null) {
             return studentService.getAllStudent();
         }
-        return studentService.getStudentsByGender(gender);
+        return studentService.getStudentsByGender(student.getGender());
     }
 
     @PutMapping("/{id}")

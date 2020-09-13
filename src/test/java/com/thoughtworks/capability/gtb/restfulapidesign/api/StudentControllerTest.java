@@ -47,7 +47,8 @@ class StudentControllerTest {
     @Test
     public void should_get_female_students_when_get_students_by_gender_given_female() throws Exception {
         mockMvc.perform(get("/students")
-                .content("female"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"gender\":\"female\"}"))
                 .andExpect(status().isOk());
     }
 
@@ -66,6 +67,14 @@ class StudentControllerTest {
                 .content(jsonStudent).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name", is("Tom")))
                 .andExpect(status().isOk());
+    }
 
+    @Test
+    public void should_bad_request_when_put_new_student_given_wrong_id() throws Exception {
+        String jsonStudent = "{\"name\": \"Tom\", \"gender\": \"male\", \"note\": \"test student\"}";
+        mockMvc.perform(put("/students/44")
+                .content(jsonStudent).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.detail.name", is("test")))
+                .andExpect(status().isBadRequest());
     }
 }

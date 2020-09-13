@@ -44,4 +44,15 @@ class GroupControllerTest {
                 .andExpect(jsonPath("$.name", is("test1")))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void should_bad_request_when_patch_given_wrong_id_and_group_name() throws Exception{
+        mockMvc.perform(post("/groups"))
+                .andExpect(status().isCreated());
+        mockMvc.perform(patch("/groups/8")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\": \"test1\"}"))
+                .andExpect(jsonPath("$.detail.name", is("test")))
+                .andExpect(status().isBadRequest());
+    }
 }
