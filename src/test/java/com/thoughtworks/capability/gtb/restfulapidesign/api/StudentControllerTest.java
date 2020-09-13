@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,5 +25,16 @@ class StudentControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonStudent))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void should_return_204_when_delete_student_given_id() throws Exception {
+        String jsonStudent = "\"name\": \"Tom\", \"gender\": \"male\", \"note\": \"test student\"";
+        mockMvc.perform(post("/students")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonStudent))
+                .andExpect(status().isCreated());
+        mockMvc.perform(delete("/students/1"))
+                .andExpect(status().isNoContent());
     }
 }

@@ -14,4 +14,9 @@ public class StudentRepo {
         generateId ++;
         students.add(student);
     }
+
+    public void deleteById(int id) {
+        students.remove(id);
+        generateId --;
+    }
 }
