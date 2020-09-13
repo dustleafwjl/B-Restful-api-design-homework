@@ -33,4 +33,11 @@ public class GroupService {
     public List<Group> getGroups() {
         return GroupRepo.groups;
     }
+
+    public Group updateGroup(int id, Group group) {
+        if(!group.getName().equals("")) {
+            GroupRepo.groups.get(id).setName(group.getName());
+        }
+        return GroupRepo.groups.get(id);
+    }
 }

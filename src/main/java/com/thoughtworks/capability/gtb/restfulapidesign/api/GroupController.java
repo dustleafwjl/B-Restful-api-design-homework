@@ -21,6 +21,12 @@ public class GroupController {
         return groupService.createCroup();
     }
 
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Group updateGroup(@PathVariable Integer id, @RequestBody Group group) {
+        return groupService.updateGroup(id, group);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Group> getGroups() {
