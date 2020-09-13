@@ -45,4 +45,10 @@ public class StudentController {
         }
         return studentService.getStudentsByGender(gender);
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Student upDateStudent(@PathVariable Integer id, @RequestBody Student student) {
+        return studentService.updateStudentById(id, student);
+    }
 }

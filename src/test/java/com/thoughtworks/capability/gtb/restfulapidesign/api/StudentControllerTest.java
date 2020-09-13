@@ -58,4 +58,14 @@ class StudentControllerTest {
                 .andExpect(status().isOk());
 
     }
+
+    @Test
+    public void should_update_student_when_put_new_student_given_id() throws Exception {
+        String jsonStudent = "{\"name\": \"Tom\", \"gender\": \"male\", \"note\": \"test student\"}";
+        mockMvc.perform(put("/students/2")
+                .content(jsonStudent).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", is("Tom")))
+                .andExpect(status().isOk());
+
+    }
 }

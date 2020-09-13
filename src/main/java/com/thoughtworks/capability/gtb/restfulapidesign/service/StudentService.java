@@ -33,4 +33,12 @@ public class StudentService {
     public Student getStudentById(Integer id) {
         return studentRepo.getStudentById(id);
     }
+
+    public Student updateStudentById(Integer id, Student student) {
+        Student saveStudent = studentRepo.getStudentById(id);
+        saveStudent.setName(student.getName());
+        saveStudent.setGender(student.getGender());
+        saveStudent.setNote(student.getNote());
+        return studentRepo.save(saveStudent);
+    }
 }

@@ -50,10 +50,15 @@ public class StudentRepo {
         }
     };
     static int generateId = 35;
-    public void save(Student student) {
+    public Student save(Student student) {
+        if(students.containsKey(student.getId())) {
+            students.put(student.getId(), student);
+            return student;
+        }
         generateId ++;
         student.setId(generateId);
         students.put(generateId, student);
+        return students.get(generateId);
     }
 
     public void deleteById(int id) {
