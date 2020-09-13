@@ -16,7 +16,8 @@ public class GroupService {
     public List<Group> createCroup() {
         GroupRepo.clear();
         List<String> initGroup = GroupRepo.initGroup;
-        initGroup.forEach(name -> GroupRepo.groups.add(Group.builder().name(name).note("").students(new ArrayList<>()).build()));
+        initGroup.forEach(name -> GroupRepo.groups.add(Group.builder()
+                .name(name).note("").students(new ArrayList<>()).build()));
         Random random = new Random();
         int index = 0;
         List<Student> studentsCopy = new ArrayList<>(StudentRepo.students.values());
@@ -26,6 +27,10 @@ public class GroupService {
             GroupRepo.groups.get(index).addStudent(studentsCopy.remove(randNum));
             index = ++ index % GroupRepo.groups.size();
         }
+        return GroupRepo.groups;
+    }
+
+    public List<Group> getGroups() {
         return GroupRepo.groups;
     }
 }

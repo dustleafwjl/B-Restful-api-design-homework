@@ -3,10 +3,7 @@ package com.thoughtworks.capability.gtb.restfulapidesign.api;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.GroupService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +19,11 @@ public class GroupController {
     @ResponseStatus(HttpStatus.CREATED)
     public List<Group> createGroup() {
         return groupService.createCroup();
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Group> getGroups() {
+        return groupService.getGroups();
     }
 }
