@@ -21,7 +21,7 @@ public class StudentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createStudent(Student student) {
+    public void createStudent(@RequestBody Student student) {
         studentService.createStudent(student);
     }
 
@@ -31,15 +31,18 @@ public class StudentController {
         studentService.deleteStudent(id);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Student> getAllStudent() {
-        return studentService.getAllStudent();
+    public Student getStudent(@PathVariable Integer id) {
+        return studentService.getStudentById(id);
     }
 
-    @GetMapping("/{gender}")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<Student> getAllStudentsByGender(String gender) {
+    public List<Student> getAllStudentsByGender(@RequestBody(required = false) String gender) {
+        if(gender == null) {
+            return studentService.getAllStudent();
+        }
         return studentService.getStudentsByGender(gender);
     }
 }

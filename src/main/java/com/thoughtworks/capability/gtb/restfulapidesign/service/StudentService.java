@@ -29,4 +29,8 @@ public class StudentService {
     public List<Student> getStudentsByGender(String gender) {
         return studentRepo.getStudentsByGender(gender);
     }
+
+    public Student getStudentById(Integer id) {
+        return studentRepo.getStudentById(id);
+    }
 }

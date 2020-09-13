@@ -67,4 +67,8 @@ public class StudentRepo {
     public List<Student> getStudentsByGender(String gender) {
         return students.values().stream().filter(ele -> ele.getGender().equals(gender)).collect(Collectors.toList());
     }
+
+    public Student getStudentById(Integer id) {
+        return students.get(id);
+    }
 }
