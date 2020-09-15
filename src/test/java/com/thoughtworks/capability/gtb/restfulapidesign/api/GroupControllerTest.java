@@ -21,24 +21,24 @@ class GroupControllerTest {
 
     @Test
     public void should_create_groups_success_when_post() throws Exception{
-        mockMvc.perform(post("/groups"))
+        mockMvc.perform(post("/v1/groups"))
                 .andExpect(status().isCreated());
     }
 
     @Test
     public void should_get_groups_success_when_get() throws Exception{
-        mockMvc.perform(post("/groups"))
+        mockMvc.perform(post("/v1/groups"))
                 .andExpect(status().isCreated());
-        mockMvc.perform(get("/groups"))
+        mockMvc.perform(get("/v1/groups"))
                 .andExpect(jsonPath("$", hasSize(6)))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void should_update_group_when_patch_given_id_and_group_name() throws Exception{
-        mockMvc.perform(post("/groups"))
+        mockMvc.perform(post("/v1/groups"))
                 .andExpect(status().isCreated());
-        mockMvc.perform(patch("/groups/1")
+        mockMvc.perform(patch("/v1/groups/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\": \"test1\"}"))
                 .andExpect(jsonPath("$.name", is("test1")))
@@ -47,9 +47,9 @@ class GroupControllerTest {
 
     @Test
     public void should_bad_request_when_patch_given_wrong_id_and_group_name() throws Exception{
-        mockMvc.perform(post("/groups"))
+        mockMvc.perform(post("/v1/groups"))
                 .andExpect(status().isCreated());
-        mockMvc.perform(patch("/groups/8")
+        mockMvc.perform(patch("/v1/groups/8")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\": \"test1\"}"))
                 .andExpect(jsonPath("$.detail.name", is("test")))

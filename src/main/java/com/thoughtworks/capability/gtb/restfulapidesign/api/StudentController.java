@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/v1/students")
 public class StudentController {
 
     private final StudentService studentService;
@@ -37,13 +37,16 @@ public class StudentController {
         return studentService.getStudentById(id);
     }
 
-    @GetMapping()
+    @GetMapping(value = "", params = "gender")
     @ResponseStatus(HttpStatus.OK)
-    public List<Student> getAllStudentsByGender(@RequestBody(required = false) Student student) {
-        if(student == null) {
-            return studentService.getAllStudent();
-        }
-        return studentService.getStudentsByGender(student.getGender());
+    public List<Student> getAllStudentsByGender(@RequestParam String gender) {
+        return studentService.getStudentsByGender(gender);
+    }
+
+    @GetMapping(value = "")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudent();
     }
 
     @PutMapping("/{id}")
